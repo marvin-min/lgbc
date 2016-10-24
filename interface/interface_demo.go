@@ -37,6 +37,10 @@ type Men interface {
 }
 
 func main() {
+	test()
+}
+
+func test()  {
 	mark := Student{Human{"mark", 25, "2222-2222-2222"}, "TingsHua",0.01}
 	sam := Employee{Human{"Sam", 32, "1111-1111-1111"}, "Google",1111}
 
@@ -47,4 +51,11 @@ func main() {
 	men = sam
 	men.SayHi()
 	men.Sing("hohoho")
+
+	if value, ok := men.(Employee)/* 此处所传的类型智能是 实现了interface的类型*/; ok{
+		//if value == `Employee` {
+		fmt.Print("===ok====",value)
+		//}
+		fmt.Print(ok)
+	}
 }
