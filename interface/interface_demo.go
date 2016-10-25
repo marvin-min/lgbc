@@ -51,11 +51,19 @@ func test()  {
 	men = sam
 	men.SayHi()
 	men.Sing("hohoho")
+	switch value := men.(type) {
+	case Student:
+		fmt.Print(value.school)
+	case Employee:
+		fmt.Print(value.company)
+	default:
+		fmt.Print("NOT a valid type")
 
-	if value, ok := men.(Employee)/* 此处所传的类型智能是 实现了interface的类型*/; ok{
-		//if value == `Employee` {
-		fmt.Print("===ok====",value)
-		//}
-		fmt.Print(ok)
 	}
+	//if value, ok := men.(Employee)/* 此处所传的类型智能是 实现了interface的类型*/; ok{
+	//	//if value == `Employee` {
+	//	fmt.Print("===ok====",value)
+	//	//}
+	//	fmt.Print(ok)
+	//}
 }
