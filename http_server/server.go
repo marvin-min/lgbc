@@ -10,6 +10,7 @@ import (
 	"io"
 	"strconv"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -40,8 +41,8 @@ func uploadFile(writer http.ResponseWriter, request *http.Request) {
 		}
 		defer file.Close()
 		fmt.Fprintf(writer, "%v", handler.Header)
-
-		f, err := os.OpenFile("/Users/marvinmin/projects/go/src/go-web/http_server/"+handler.Filename, os.O_WRONLY | os.O_CREATE, 066)
+		name := strings.Split(handler.Filename, "/")
+		f, err := os.OpenFile("/Users/marvinmin/projects/go/src/go-web/http_server/"+name[len(name)-1], os.O_WRONLY | os.O_CREATE, 066)
 		if err != nil {
 			fmt.Println(err)
 			return
