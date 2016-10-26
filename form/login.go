@@ -39,8 +39,9 @@ func login(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintf(w, "年龄必须在18~60岁之间")
 			return
 		}
-		if ok := validProvince(r);ok {
-			fmt.Fprintf(w, "省份验证通过" + strconv.FormatBool(ok))
+		province := r.Form.Get("province")
+		if ok := validProvince(province);ok {
+			fmt.Fprintf(w, "欢迎您：%s, 您来自 %s 省", template.HTMLEscapeString(name),province)
 		} else {
 			fmt.Fprintf(w, "无效省份")
 		}
@@ -48,10 +49,10 @@ func login(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func validProvince(r *http.Request) bool {
+func validProvince(province string) bool {
 	slice := []string{"陕西", "北京"}
 	for _, v := range slice {
-		if v == r.Form.Get("province") {
+		if v == province {
 			return true
 		}
 	}
