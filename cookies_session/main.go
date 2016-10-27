@@ -17,5 +17,7 @@ func main() {
 func sayHello(w http.ResponseWriter, r *http.Request)  {
 	cookie := http.Cookie{Name:"hello",Value:"world"}
 	http.SetCookie(w,&cookie)
-	fmt.Fprint(w,"Hello World")
+	for _, cookie := range r.Cookies(){
+		fmt.Fprintln(w,cookie.Name+"="+cookie.Value)
+	}
 }
