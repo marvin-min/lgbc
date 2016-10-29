@@ -19,7 +19,44 @@ type Rs struct {
 }
 
 func main() {
-	testRegx()
+	a := `I am a learning Go language`
+	re, _ := regexp.Compile("[a-z]{2,4}")
+	one := re.Find([]byte(a))
+	fmt.Println(string(one))
+
+	all := re.FindAll([]byte(a), -1)
+	for _, item:= range all {
+		fmt.Println(string(item))
+	}
+
+	allindex := re.FindAllIndex([]byte(a), -1)
+	fmt.Println(allindex)
+
+	re2,_:= regexp.Compile("am(.*)lang(.*)")
+
+	submatch := re2.FindSubmatch([]byte(a))
+	fmt.Println(submatch)
+
+	for _, v := range submatch {
+		fmt.Println(string(v))
+	}
+
+	submatchIndex := re2.FindAllSubmatchIndex([]byte(a),-1)
+	fmt.Println(submatchIndex)
+
+	src := []byte(`
+		call hello alice
+		hello bob
+		call hello eve
+	`)
+
+	pat := regexp.MustCompile(`(?m)(call)\s+(?P<cmd>\w+)\s(?P<arg>.+)\s*$`)
+	res := []byte{}
+	for _,s :=range pat.FindAllSubmatchIndex(src,-1) {
+		res = pat.Expand(res,[]byte("$cmd('$arg')\n"),src,s)
+	}
+	fmt.Println(string(res))
+
 }
 
 func testRegx() {
@@ -38,8 +75,8 @@ func testRegx() {
 	jsRe, _ := regexp.Compile("\\<script[\\S\\s]+?\\</script\\>")
 	src = jsRe.ReplaceAllString(src, "")
 	hre, _ := regexp.Compile("\\<[\\S\\s]+?\\>")
-	src =hre.ReplaceAllString(src, "\n")
-	nre,_ := regexp.Compile("\\s{2,}")
+	src = hre.ReplaceAllString(src, "\n")
+	nre, _ := regexp.Compile("\\s{2,}")
 	src = nre.ReplaceAllString(src, "\n")
 	fmt.Println(strings.TrimSpace(src))
 }
