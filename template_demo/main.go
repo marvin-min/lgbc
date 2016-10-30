@@ -27,7 +27,7 @@ func ifDemo()  {
 
 func simpleDemo()  {
 	t := template.New("hello")
-	t, _ = t.Parse(`hello: {{.UserName}}"
+	t, _ = t.Parse(`hello: {{.UserName | len}}"
 	 {{with .Phones }}
 	 {{range .}}
 	 	likes Phone brand:{{.Brand}}
