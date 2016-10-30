@@ -16,6 +16,16 @@ type Person struct {
 }
 
 func main()  {
+
+}
+
+func ifDemo()  {
+	tEmpty := template.New("test")
+	tEmpty = template.Must(tEmpty.Parse("空 piplie if demo: {{if false }} 不会输出. {{end}}"))
+	tEmpty.Execute(os.Stdout,nil)
+}
+
+func simpleDemo()  {
 	t := template.New("hello")
 	t, _ = t.Parse(`hello: {{.UserName}}"
 	 {{with .Phones }}
