@@ -3,7 +3,35 @@ package main
 import (
 	"fmt"
 	"time"
+	"runtime"
 )
+
+func forever() {
+	for {
+		fmt.Println(".")
+	}
+}
+
+func show() {
+	for {
+		fmt.Println("-")
+	}
+}
+
+func main() {
+	n := runtime.NumCPU()
+	fmt.Print("total",n,"cpu")
+	runtime.GOMAXPROCS(n)
+	go show()
+	go forever()
+	for {
+		time.Sleep(1000)
+	}
+}
+
+
+
+
 
 func fibonacci(n int, c chan int) {
 	x, y := 1, 1
@@ -14,13 +42,13 @@ func fibonacci(n int, c chan int) {
 	close(c)
 }
 
-func main() {
-	c := make(chan int,10)
-	go fibonacci(cap(c),c)
-	for i := range c {
-		fmt.Println(i)
-	}
-}
+//func main() {
+//	c := make(chan int,10)
+//	go fibonacci(cap(c),c)
+//	for i := range c {
+//		fmt.Println(i)
+//	}
+//}
 
 func channelDemo() {
 	var a []int = make([]int, 100000000)
