@@ -7,6 +7,7 @@ import (
 
 func main()  {
 	os.Remove("hello.text")
+	writeFile()
 	readFile()
 }
 
