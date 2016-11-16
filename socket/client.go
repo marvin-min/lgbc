@@ -21,7 +21,7 @@ func main() {
 }
 
 func god()  {
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 10; i++ {
 		fmt.Println("send", i, "request")
 		go sendRequest(i)
 
