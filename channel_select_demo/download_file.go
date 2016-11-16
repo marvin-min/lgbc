@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-var num = 14
+var num = 10
 var cnum chan int
 
 func main() {
@@ -20,7 +20,9 @@ func main() {
 	}
 
 	for i:=0; i< num; i++{
-		<-cnum
+		value, status := <-cnum
+		fmt.Printf("Finish to deal %d \r\n",value)
+		fmt.Println("status",status)
 	}
 
 	fmt.Println("=======Done========")
@@ -28,7 +30,7 @@ func main() {
 }
 
 func Printer(i int)  {
-	time.Sleep(20*time.Second)
+	time.Sleep(3*time.Second)
 	fmt.Printf("I am %d\r\n",i)
-	cnum <- 1
+	cnum <- i
 }
