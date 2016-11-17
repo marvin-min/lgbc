@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var sock = null;
+		var wsuri = 'ws://127.0.0.1:1234';
+		window.onload = function() {
+			sock = new WebSocket(wsuri);
+			sock.onopen = function () {
+				console.log("connected to :"+ wsuri)
+			};
+			sock.onclose = function(e){
+				console.log("disconnected from :"+ wsuri + e.code)
+			};
+			sock.onmessage = function (e) {
+				document.getElementById('container').innerHTML += "<p style='background: lightgray'>" + e.data +"</p>";
+			};
+		};
+		function send() {
+			var msg = document.getElementById("message").value;
+			sock.send(msg);
+		};
+	</script>
+<textarea id="message">
+
+</textarea>
+<button onclick="send()">发送消息</button>
+<div id="container">
+
+</div>
+</body>
+</html>
