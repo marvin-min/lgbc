@@ -24,11 +24,14 @@
 			var msg = document.getElementById("message").value;
 			sock.send(msg);
 		};
+		function closeSock() {
+			sock.close();
+		}
 	</script>
 <textarea id="message">
 
 </textarea>
-<button onclick="send()">发送消息</button>
+<button onclick="send()">发送消息</button><button onclick="closeSock()">离开</button>
 <div id="container">
 
 </div>
