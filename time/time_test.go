@@ -10,3 +10,12 @@ func Test_CosName(t *testing.T)  {
 		t.Error("测试失败")
 	}
 }
+
+
+func BenchmarkCosName(b *testing.B) {
+	b.StopTimer()
+	b.StartTimer()
+	for i:= 0;i < b.N;i ++{
+		CosName("啊大法师发沙发上发sf安师大发生发顺丰")
+	}
+}
